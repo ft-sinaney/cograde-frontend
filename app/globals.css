@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+[data-theme="dark"] {
+  --bg: 224 47% 6%;
+  --bg-raised: 224 40% 9%;
+  --bg-sunken: 226 45% 4%;
+  --surface: 224 32% 11%;
+  --surface-hover: 224 28% 15%;
+  --border: 226 24% 20%;
+  --border-soft: 226 22% 15%;
+  --text: 210 40% 98%;
+  --text-muted: 215 20% 66%;
+  --text-faint: 215 15% 46%;
+  --primary: 245 75% 63%;
+  --primary-hover: 245 80% 70%;
+  --primary-soft: 245 55% 20%;
+  --accent: 217 91% 60%;
+  --success: 160 84% 44%;
+  --success-soft: 160 55% 16%;
+  --warning: 38 92% 55%;
+  --warning-soft: 38 65% 18%;
+  --danger: 350 89% 62%;
+  --danger-soft: 350 65% 20%;
+  --info: 217 91% 60%;
+  --shadow-color: 222 60% 2%;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: 220 32% 97%;
+  --bg-raised: 0 0% 100%;
+  --bg-sunken: 220 27% 93%;
+  --surface: 0 0% 100%;
+  --surface-hover: 220 30% 97%;
+  --border: 220 20% 88%;
+  --border-soft: 220 20% 92%;
+  --text: 222 47% 12%;
+  --text-muted: 220 12% 40%;
+  --text-faint: 220 10% 55%;
+  --primary: 245 75% 58%;
+  --primary-hover: 245 75% 52%;
+  --primary-soft: 245 70% 94%;
+  --accent: 217 91% 52%;
+  --success: 160 84% 32%;
+  --success-soft: 160 65% 92%;
+  --warning: 38 92% 42%;
+  --warning-soft: 38 90% 92%;
+  --danger: 350 82% 50%;
+  --danger-soft: 350 85% 95%;
+  --info: 217 91% 48%;
+  --shadow-color: 220 40% 65%;
+  color-scheme: light;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--bg));
+  color: hsl(var(--text));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background-color: hsl(var(--primary) / 0.35);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--border));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: hsl(var(--text-faint));
+  background-clip: content-box;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-border bg-surface shadow-card;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-150 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50;
+  }
+  .btn-primary {
+    @apply btn bg-brand-gradient text-white shadow-glow hover:brightness-110 active:brightness-95;
+  }
+  .btn-secondary {
+    @apply btn border border-border bg-surface text-text hover:bg-surface-hover;
+  }
+  .btn-ghost {
+    @apply btn text-text-muted hover:bg-surface-hover hover:text-text;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-border bg-bg-sunken px-3.5 py-2.5 text-sm text-text placeholder:text-text-faint outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-1 text-[11px] font-semibold leading-none;
+  }
+  .badge-success {
+    @apply badge bg-success-soft text-success;
+  }
+  .badge-warning {
+    @apply badge bg-warning-soft text-warning;
+  }
+  .badge-danger {
+    @apply badge bg-danger-soft text-danger;
+  }
+  .badge-info {
+    @apply badge bg-primary-soft text-primary;
+  }
+  .badge-neutral {
+    @apply badge bg-bg-sunken text-text-muted border border-border-soft;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted transition-colors hover:bg-surface-hover hover:text-text;
+  }
+  .nav-link-active {
+    @apply nav-link bg-primary-soft text-primary hover:bg-primary-soft hover:text-primary;
+  }
+
+  .table-shell {
+    @apply w-full border-collapse text-left text-sm;
+  }
+  .table-shell thead th {
+    @apply sticky top-0 z-10 border-b border-border bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wide text-text-faint;
+  }
+  .table-shell tbody td {
+    @apply border-b border-border-soft px-4 py-3.5 align-middle text-text;
+  }
+  .table-shell tbody tr {
+    @apply transition-colors hover:bg-surface-hover;
+  }
+
+  .kpi-card {
+    @apply card flex flex-col gap-1.5 p-5;
+  }
+
+  .glass-topbar {
+    @apply sticky top-0 z-30 border-b border-border-soft bg-bg/80 backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .text-gradient {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+}
